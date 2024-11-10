@@ -5,7 +5,11 @@ import TopNav from "@/components/navigation/TopNavigation/topNav";
 const TopNavLayout = () => {
   return (
     <View>
-      <TopNav />
+      <TopNav
+        onPress={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
     </View>
   );
 };

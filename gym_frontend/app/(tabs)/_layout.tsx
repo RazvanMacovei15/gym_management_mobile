@@ -63,30 +63,30 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="habits"
+          name="tasks"
           options={{
-            title: "Habits",
+            title: "Tasks",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.habits}
                 color={color}
-                name="Habits"
+                name="Tasks"
                 focused={focused}
               />
             ),
           }}
         />
         <Tabs.Screen
-          name="goals"
+          name="reception"
           options={{
-            title: "Goals",
+            title: "Reception",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.goals}
                 color={color}
-                name="Goals"
+                name="Reception"
                 focused={focused}
               />
             ),
@@ -99,7 +99,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.more}
+                icon={icons.goals}
                 color={color}
                 name="More"
                 focused={focused}

@@ -5,54 +5,32 @@ import AddHabitFormField from "../habitScreenComponents/AddHabitFormField";
 import CustomDropdown from "../CustomDropdown";
 import AddDescriptionFormField from "../habitScreenComponents/AddDescriptionFormField";
 import axios from "axios";
-import { useAuth } from "@/app/context/AuthContext";
-import { HabitForm } from "@/app/(tabs)/habits";
+import { TaskForm } from "@/components/types/TaskForm";
 
 interface AddHabitModalProps {
   modalVisible: boolean;
   setModalVisible: (value: boolean) => void;
-  habitForm: HabitForm;
-  setHabitForm: (value: any) => void;
+  taskForm: TaskForm;
+  setTaskForm: (value: any) => void;
   handleCreateHabit: () => void;
 }
 
 const AddHabitModal = ({
   modalVisible,
   setModalVisible,
-  habitForm,
-  setHabitForm,
+  taskForm,
+  setTaskForm,
   handleCreateHabit,
 }: AddHabitModalProps) => {
   const [error, setError] = useState(null);
-  const [types, setTypes] = useState<string[]>([]);
-  const [occurrences, setOccurrences] = useState<string[]>([]);
-  const { authState } = useAuth();
-  const token = authState?.token;
-  const fetchOccurences = async (endpoint: string, token: string) => {
+  const [categories, setCategories] = useState<string[]>([]);
+
+  const fetchCategories = async (endpoint: string) => {
     setError(null);
     try {
-      const response = await axios.get(endpoint, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setOccurrences(response.data);
-      console.log("Occurrences: ", response.data);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-    }
-  };
-  const fetchTypes = async (endpoint: string, token: string) => {
-    setError(null);
-    try {
-      const response = await axios.get(endpoint, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTypes(response.data);
-      console.log("Types: ", response.data);
+      const response = await axios.get(endpoint);
+      setCategories(response.data);
+      console.log("Categories: ", response.data);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -60,13 +38,7 @@ const AddHabitModal = ({
   };
 
   useEffect(() => {
-    if (token) {
-      fetchTypes("http://maco-coding.go.ro:8020/api/enums/types", token);
-      fetchOccurences(
-        "http://maco-coding.go.ro:8020/api/enums/occurrences",
-        token
-      );
-    }
+    fetchCategories("http://maco-coding.go.ro:8020/api/enum/category");
   }, []);
   return (
     <>
@@ -82,49 +54,17 @@ const AddHabitModal = ({
         onBackButtonPress={() => setModalVisible(!modalVisible)}
       >
         <View className="border-2  mx-2 p-2 bg-white items-center justify-evenly flex flex-col shadow-2xl shadow-slate-900 rounded-2xl">
-          <AddHabitFormField
-            title={"NAME"}
-            value={habitForm.habitName}
-            handleChangeText={(e) =>
-              setHabitForm({
-                ...habitForm,
-                habitName: e,
-              })
-            }
-            placeholder={"Name of the habit"}
-          />
-
           <CustomDropdown
-            data={types}
+            data={categories}
             title="type:"
             onSelectValue={(e: string) =>
-              setHabitForm({
-                ...habitForm,
-                type: e,
+              setTaskForm({
+                ...taskForm,
+                category: e,
               })
             }
           />
-          <CustomDropdown
-            data={occurrences}
-            title="occurrence:"
-            onSelectValue={(e: string) => {
-              setHabitForm({
-                ...habitForm,
-                occurrence: e,
-              });
-            }}
-          />
-          <AddDescriptionFormField
-            title={"Description"}
-            value={habitForm.description}
-            handleChangeText={(e) => {
-              setHabitForm({
-                ...habitForm,
-                description: e,
-              });
-            }}
-            placeholder={"Write a short description"}
-          />
+
           <View className="flex flex-row w-full justify-between m-5">
             <Pressable
               onPress={() => handleCreateHabit()}

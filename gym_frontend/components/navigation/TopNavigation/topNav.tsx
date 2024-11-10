@@ -24,9 +24,9 @@ const TopNav = ({ onPress }: TopNavProps) => {
         />
       </TouchableOpacity>
       <TouchableOpacity className="flex-col w-2/4 items-center justify-center">
-        <Text className="text-4xl rounded-lg p-2 font-medium">FOCUS</Text>
+        <Text className="text-4xl rounded-lg p-2 font-medium">GYM</Text>
         <Text className="text-center text-xs text-black w-full">
-          That which you don't track{"\n"} You can't improve
+          Track your tasks our way!
         </Text>
       </TouchableOpacity>
       <TouchableOpacity

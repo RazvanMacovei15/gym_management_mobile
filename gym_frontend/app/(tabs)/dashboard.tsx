@@ -5,7 +5,9 @@ import TopNav from "@/components/navigation/TopNavigation/topNav";
 const Dashboard = () => {
   return (
     <View className="bg-gray-200 flex-1">
-      <TopNav />
+      <TopNav onPress={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
     </View>
   );
 };
