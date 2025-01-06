@@ -1,20 +1,21 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ImageSourcePropType } from "react-native";
 import React from "react";
 import { Tabs, Redirect } from "expo-router";
 import { icons } from "../../constants";
 
 interface TabIconProps {
-  icon: any;
+  // icon: string;
   color: string;
   name: string;
   focused: boolean;
+  icon: any;
 }
 
 const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
   return (
     <View className="items-center justify-center gap-1">
       <Image
-        source={icon}
+        source={icon as ImageSourcePropType}
         resizeMode="contain"
         tintColor={color}
         className="w-8 h-8"
@@ -78,28 +79,13 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="reception"
-          options={{
-            title: "Reception",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.goals}
-                color={color}
-                name="Reception"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="more"
           options={{
             title: "More",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.goals}
+                icon={icons.more}
                 color={color}
                 name="More"
                 focused={focused}

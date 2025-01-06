@@ -1,13 +1,17 @@
 import { View, Text } from "react-native";
 import React from "react";
-import TopNav from "@/components/navigation/TopNavigation/topNav";
+import TopNav from "@/components/navigation/TopNav";
 
 const Dashboard = () => {
   return (
     <View className="bg-gray-200 flex-1">
-      <TopNav onPress={function (): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <TopNav />
+      <View className="grow items-center justify-center">
+        <Text>Here you will be able to see the status of your gym.</Text>
+        <Text className="p-10 text-3xl text-green-700">
+          Stay tuned for more!
+        </Text>
+      </View>
     </View>
   );
 };

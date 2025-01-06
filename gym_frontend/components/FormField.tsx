@@ -48,8 +48,8 @@ const FormField = ({
             <Image
               source={
                 !showPassword
-                  ? (icons.eyeHide as ImageSourcePropType)
-                  : (icons.eye as ImageSourcePropType)
+                  ? icons.eyeHide || require("../assets/icons/eye-hide.png")
+                  : icons.eye || require("../assets/icons/eye.png")
               }
               className="w-8 h-8"
               resizeMode="contain"

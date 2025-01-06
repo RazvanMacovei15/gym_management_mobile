@@ -38,7 +38,7 @@ const CustomDropdown = ({
   };
 
   return (
-    <View className="w-full mt-4">
+    <View className="w-1/2 mt-4 mx-1">
       {/* {renderLabel()} */}
       <Text className="text-xl">{title.toUpperCase()}</Text>
       <Dropdown
@@ -66,7 +66,7 @@ export default CustomDropdown;
 
 const styles = StyleSheet.create({
   dropdown: {
-    height: 40,
+    height: 50,
     backgroundColor: "white",
     borderRadius: 12,
     padding: 5,

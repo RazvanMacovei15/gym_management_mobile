@@ -7,26 +7,29 @@ import {
   Text,
   ImageSourcePropType,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { icons } from "../../../constants";
+import { icons } from "../../constants";
 
 interface TopNavProps {
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const TopNav = ({ onPress }: TopNavProps) => {
   return (
-    <View className="flex-row justify-around mt-12 pb-4 rounded-b-3xl">
+    <View className="flex flex-row justify-around mt-12 pb-4 rounded-b-3xl items-center">
       <TouchableOpacity className="justify-center items-center w-1/4">
         <Image
-          source={icons.user_circle as ImageSourcePropType}
+          source={
+            icons.user_circle || require("../../assets/icons/user_circle.png")
+          }
           className="h-14 w-14"
         />
       </TouchableOpacity>
-      <TouchableOpacity className="flex-col w-2/4 items-center justify-center">
-        <Text className="text-4xl rounded-lg p-2 font-medium">GYM</Text>
+      <TouchableOpacity className="flex flex-col w-2/4 items-center justify-center">
+        <Text className="text-4xl rounded-lg p-2 font-medium text-center">
+          GYM
+        </Text>
         <Text className="text-center text-xs text-black w-full">
-          Track your tasks our way!
+          That which you don't track{"\n"} You can't improve
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -34,7 +37,9 @@ const TopNav = ({ onPress }: TopNavProps) => {
         onPress={onPress}
       >
         <Image
-          source={icons.notification as ImageSourcePropType}
+          source={
+            icons.notification || require("../../assets/icons/notification.png")
+          }
           className="h-8 w-8"
         />
       </TouchableOpacity>

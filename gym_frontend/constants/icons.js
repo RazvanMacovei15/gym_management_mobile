@@ -20,8 +20,10 @@ import user_circle from "../assets/icons/user_circle.png";
 import update from "../assets/icons/update.png";
 import deletePNG from "../assets/icons/delete.png";
 import edit from "../assets/icons/edit.png";
+import arrow from "../assets/icons/arrow.png";
 
 export default {
+  arrow,
   edit,
   deletePNG,
   update,
