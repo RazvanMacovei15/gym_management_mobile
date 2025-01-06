@@ -8,6 +8,7 @@ import React, {
 import axios from "axios";
 import * as SecureStorage from "expo-secure-store";
 import { useRouter } from "expo-router";
+import { User } from "@/components/types/User";
 
 // Constants
 const TOKEN_KEY = "my-jwt-token";
@@ -18,6 +19,7 @@ interface AuthProps {
   authState?: {
     token: string | null;
     authenticated: boolean | null;
+    currentUser?: User | null;
   };
   onRegister?: (
     username: string,
@@ -44,9 +46,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [authState, setAuthState] = useState<{
     token: string | null;
     authenticated: boolean | null;
+    currentUser?: User | null;
   }>({
     token: null,
     authenticated: null,
+    currentUser: null,
   });
 
   // Load token from secure storage on app load
@@ -111,24 +115,23 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // onLogin function
   const onLogin = async (email: string, password: string) => {
     try {
-      console.log(email);
-      console.log(password);
-
       const result = await axios.post(`${API_URL}auth/login`, {
         email,
         password,
       });
 
-      console.log(result);
+      console.log(result.data.user);
 
       setAuthState({
         token: result.data.token,
         authenticated: true,
+        currentUser: result.data.user,
       });
 
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${result.data.token}`;
+
       await SecureStorage.setItemAsync(TOKEN_KEY, result.data.token);
 
       return result;

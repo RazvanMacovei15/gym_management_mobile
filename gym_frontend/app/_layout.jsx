@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import "../global.css";
 import { ErrorBoundary, Slot, Stack } from "expo-router";
 import { AuthProvider } from "../app/context/AuthContext";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const RootLayout = () => {
   return (
