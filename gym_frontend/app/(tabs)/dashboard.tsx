@@ -4,7 +4,7 @@ import TopNav from "@/components/navigation/TopNav";
 
 const Dashboard = () => {
   return (
-    <View className="bg-gray-200 flex-1">
+    <View className="bg-pink-950 flex-1">
       <TopNav />
       <View className="grow items-center justify-center">
         <Text>Here you will be able to see the status of your gym.</Text>

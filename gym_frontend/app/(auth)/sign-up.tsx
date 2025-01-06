@@ -12,7 +12,7 @@ const SignUp = () => {
   const { onRegister } = useAuth();
 
   const [form, setForm] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -28,7 +28,7 @@ const SignUp = () => {
 
     try {
       if (onRegister) {
-        await onRegister(form.username, form.email, form.password);
+        await onRegister(form.name, form.email, form.password, "MANAGER");
 
         Alert.alert("Success", "User signed up successfully");
         router.replace("/dashboard");
@@ -50,11 +50,11 @@ const SignUp = () => {
           <View className="mb-20">
             <FormField
               title="Username"
-              value={form.username}
+              value={form.name}
               handleChangeText={(e) =>
                 setForm({
                   ...form,
-                  username: e,
+                  name: e,
                 })
               }
               otherStyles="mt-7"

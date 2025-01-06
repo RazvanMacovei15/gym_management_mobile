@@ -4,12 +4,15 @@ import TopNav from "@/components/navigation/TopNav";
 import { Task } from "@/components/types/Task";
 import axios from "axios";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import TaskCard from "@/components/task-view/task-minicard/TaskCard";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  // razvanmc15@gmail.com
+  // manager
   // Fetch tasks from API
   const fetchTasksData = async () => {
     try {
@@ -18,7 +21,6 @@ const Tasks = () => {
         "http://maco-coding.go.ro:8010/tasks/all"
       );
       setTasks(response.data);
-      console.log("Tasks from API:", response.data);
     } catch (err) {
       console.error("Failed to fetch tasks:", err);
       setError("Failed to fetch tasks.");
@@ -32,7 +34,7 @@ const Tasks = () => {
   }, []);
 
   return (
-    <View className="flex flex-col h-full">
+    <View className="flex flex-col h-full bg-gray-900">
       <TopNav
         onPress={function (): void {
           throw new Error("Function not implemented.");
@@ -40,13 +42,12 @@ const Tasks = () => {
       />
       <View className="flex flex-col grow">
         <ProtectedRoute allowedRoles="ADMIN">
-          <View className="grow items-center justify-center">
-            <Text>
-              You will be able to manage your tasks here in the future.
-            </Text>
-            <Text className="p-10 text-3xl text-green-700">
-              Stay tuned for more!
-            </Text>
+          <View className="grow items-center justify-start mt-4">
+            {loading && <Text>Loading tasks...</Text>}
+            {error && <Text>{error}</Text>}
+            {tasks.map((task, index) => (
+              <TaskCard key={index} task={task} index={index} />
+            ))}
           </View>
         </ProtectedRoute>
       </View>

@@ -39,6 +39,7 @@ const FormField = ({
           placeholderTextColor="#7b7b8b"
           onChangeText={handleChangeText}
           secureTextEntry={title === "Password" && !showPassword}
+          autoCapitalize="none"
         />
         {title === "Password" && (
           <TouchableOpacity

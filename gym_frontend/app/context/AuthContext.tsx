@@ -9,9 +9,12 @@ import axios from "axios";
 import * as SecureStorage from "expo-secure-store";
 import { useRouter } from "expo-router";
 import { User } from "@/components/types/User";
+import { set } from "date-fns";
 
 // Constants
 const TOKEN_KEY = "my-jwt-token";
+const USER_KEY = "user-data";
+const PROFILE_PHOTO_KEY = "profile-photo";
 export const API_URL = "http://maco-coding.go.ro:8010/";
 
 // Define the AuthContext type
@@ -22,12 +25,15 @@ interface AuthProps {
     currentUser?: User | null;
   };
   onRegister?: (
-    username: string,
+    name: string,
     email: string,
-    password: string
+    password: string,
+    role: string
   ) => Promise<any>;
   onLogin?: (email: string, password: string) => Promise<any>;
   onLogout?: () => Promise<any>;
+  fetchProfilePhoto?: () => Promise<void>;
+  profilePhoto?: string;
 }
 
 // Create the AuthContext
@@ -41,6 +47,19 @@ export const useAuth = () => {
 // AuthProvider component
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
+
+  const [profilePhoto, setProfilePhoto] = useState<string>("");
+
+  const fetchProfilePhoto = async () => {
+    try {
+      const result = await axios.get(
+        `http://maco-coding.go.ro:8010/minio/generate-url`
+      );
+      setProfilePhoto(result.data);
+    } catch (error) {
+      console.error("Error fetching profile photo:", error);
+    }
+  };
 
   // Authentication state
   const [authState, setAuthState] = useState<{
@@ -56,32 +75,73 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // Load token from secure storage on app load
   useEffect(() => {
     const loadToken = async () => {
-      const token = await SecureStorage.getItemAsync(TOKEN_KEY);
-      if (token) {
+      try {
+        const token = await SecureStorage.getItemAsync(TOKEN_KEY);
+        const user = await SecureStorage.getItemAsync(USER_KEY);
+        const profilePhoto = await SecureStorage.getItemAsync(
+          PROFILE_PHOTO_KEY
+        );
+
+        console.log("Token loaded:", token);
+        console.log("User loaded:", user);
+        console.log("Profile photo loaded:", profilePhoto);
+
+        if (!token) {
+          console.log("No token found, logging out...");
+          await onLogout();
+          return;
+        }
+
+        console.log("Token found, verifying...");
+
+        // Validate token with backend
+        const response = await axios.get(
+          `http://maco-coding.go.ro:8010/auth/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Set authentication state
         setAuthState({
           token,
           authenticated: true,
+          currentUser: response.data.user,
         });
+
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+        // Fetch profile photo
+        await fetchProfilePhoto();
+      } catch (error) {
+        console.error("Error verifying token or fetching user data:", error);
+
+        // If token is invalid, log out the user
+        await onLogout();
       }
     };
+
     loadToken();
   }, []);
 
   // onRegister function
   const onRegister = async (
-    username: string,
+    name: string,
     email: string,
-    password: string
+    password: string,
+    role: string
   ) => {
     try {
-      console.log(username);
+      console.log(name);
       console.log(email);
 
       const result = await axios.post(`${API_URL}auth/signup`, {
-        username,
+        name,
         email,
         password,
+        role,
       });
 
       console.log(result);
@@ -120,7 +180,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         password,
       });
 
-      console.log(result.data.user);
+      setProfilePhoto(result.data.preSignedUrl);
 
       setAuthState({
         token: result.data.token,
@@ -133,6 +193,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       ] = `Bearer ${result.data.token}`;
 
       await SecureStorage.setItemAsync(TOKEN_KEY, result.data.token);
+      await SecureStorage.setItemAsync(
+        PROFILE_PHOTO_KEY,
+        result.data.preSignedUrl
+      );
+      await SecureStorage.setItemAsync(
+        USER_KEY,
+        JSON.stringify(result.data.user)
+      );
 
       return result;
     } catch (error) {
@@ -150,10 +218,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // onLogout function
   const onLogout = async () => {
     await SecureStorage.deleteItemAsync(TOKEN_KEY);
+    await SecureStorage.deleteItemAsync("USER_KEY");
     axios.defaults.headers.common["Authorization"] = "";
     setAuthState({
       token: null,
       authenticated: false,
+      currentUser: null,
     });
     router.push("/sign-in");
   };
@@ -164,6 +234,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onRegister,
     onLogin,
     onLogout,
+    fetchProfilePhoto,
+    profilePhoto,
   };
 
   // Return the AuthProvider with the context value
