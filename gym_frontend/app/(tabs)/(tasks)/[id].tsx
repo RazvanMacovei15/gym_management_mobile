@@ -3,9 +3,13 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Task } from "@/components/types/Task";
 import axios from "axios";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 const TaskDetailsScreen = () => {
+  const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
@@ -43,7 +47,10 @@ const TaskDetailsScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="flex items-center justify-start bg-slate-900 gap-1 p-4 h-full">
+    <SafeAreaView
+      edges={["top"]}
+      className="flex items-center justify-start bg-slate-900 gap-1 p-4 h-full"
+    >
       <Text className="text-white text-3xl font-bold w-full">
         Title: {task?.title}
       </Text>

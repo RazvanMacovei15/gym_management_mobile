@@ -8,8 +8,14 @@ import TaskCard from "@/components/task-view/task-minicard/TaskCard";
 import { Link, useRouter } from "expo-router";
 import { useAuth } from "@/app/context/AuthContext";
 import { Gym } from "@/components/types/Gym";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 const Tasks = () => {
+  const insets = useSafeAreaInsets();
+
   const [tasks, setTasks] = useState<Task[]>([]);
   const [gym, setGym] = useState<Gym | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -57,7 +63,7 @@ const Tasks = () => {
   }, []);
 
   return (
-    <View className="flex flex-col h-full bg-slate-900">
+    <SafeAreaView className="flex flex-col h-full bg-slate-900">
       <TopNav onPress={() => console.log("TopNav pressed")} />
       <ScrollView>
         <View className="flex flex-col grow">
@@ -78,7 +84,7 @@ const Tasks = () => {
           </ProtectedRoute>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

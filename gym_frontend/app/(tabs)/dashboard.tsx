@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
 import React from "react";
 import TopNav from "@/components/navigation/TopNav";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Dashboard = () => {
   return (
-    <View className="bg-slate-900 flex-1">
+    <SafeAreaView className="bg-slate-900 flex-1">
       <TopNav />
       <View className="grow items-center justify-center ">
         <Text className="text-[#9d174d]">
@@ -14,7 +15,7 @@ const Dashboard = () => {
           Stay tuned for more!
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

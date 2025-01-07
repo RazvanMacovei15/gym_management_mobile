@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { icons } from "../../constants";
 import { useAuth } from "@/app/context/AuthContext";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface TopNavProps {
   onPress?: () => void;
@@ -22,9 +23,10 @@ const TopNav = ({ onPress }: TopNavProps) => {
       fetchProfilePhoto();
     }
   }, []);
+  const insets = useSafeAreaInsets();
 
   return (
-    <View className="flex flex-row justify-around mt-12 pb-4 rounded-b-3xl items-center">
+    <View className="flex flex-row justify-around pb-4 rounded-b-3xl items-center">
       <TouchableOpacity className="justify-center items-center w-1/4">
         <Image
           resizeMode="cover"

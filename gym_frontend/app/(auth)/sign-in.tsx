@@ -6,6 +6,9 @@ import CustomButon from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { useAuth } from "../context/AuthContext";
 
+// razvanmc15@gmail.com
+// manager
+
 const SignIn = () => {
   const { onLogin } = useAuth();
 
