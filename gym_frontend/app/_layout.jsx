@@ -4,15 +4,19 @@ import "../global.css";
 import { ErrorBoundary, Slot, Stack } from "expo-router";
 import { AuthProvider } from "../app/context/AuthContext";
 import ProtectedRoute from "../components/ProtectedRoute";
+import { ModalProvider } from "../app/context/ModalContext";
 
 const RootLayout = () => {
   return (
     <AuthProvider>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <ModalProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </ModalProvider>
+      
     </AuthProvider>
   );
 };

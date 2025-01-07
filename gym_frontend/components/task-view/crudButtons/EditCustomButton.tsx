@@ -9,20 +9,16 @@ import React from "react";
 import { icons } from "../../../constants";
 
 interface EditCustomButtonProps {
-  isDisabled?: boolean;
   onPress?: () => void;
 }
 
-const EditCustomButton = ({
-  isDisabled = true,
-  onPress,
-}: EditCustomButtonProps) => {
+const EditCustomButton = ({ onPress }: EditCustomButtonProps) => {
   return (
-    <TouchableOpacity disabled={isDisabled} onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Image
-        source={icons.edit || require("../assets/icons/edit.png")}
-        className={`w-10 h-10 ${isDisabled ? "opacity-30" : ""}`}
-        tintColor={"black"}
+        source={icons.edit as ImageSourcePropType}
+        className={`w-8 h-8 opacity-100`}
+        tintColor={"white"}
       />
     </TouchableOpacity>
   );

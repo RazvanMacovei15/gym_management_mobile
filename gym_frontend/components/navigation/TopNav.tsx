@@ -33,10 +33,10 @@ const TopNav = ({ onPress }: TopNavProps) => {
         />
       </TouchableOpacity>
       <TouchableOpacity className="flex flex-col w-2/4 items-center justify-center">
-        <Text className="text-4xl rounded-lg p-2 font-medium text-center text-white">
+        <Text className="text-4xl rounded-lg p-2 font-medium text-center text-[#9d174d]">
           GYM
         </Text>
-        <Text className="text-center text-xs text-white w-full ">
+        <Text className="text-center text-xs text-[#9d174d] w-full ">
           That which you don't track{"\n"} You can't improve
         </Text>
       </TouchableOpacity>

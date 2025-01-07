@@ -9,20 +9,16 @@ import React from "react";
 import { icons } from "../../../constants";
 
 interface DeleteCustomButtonProps {
-  isDisabled?: boolean;
   onPress: () => void;
 }
 
-const DeleteCustomButon = ({
-  isDisabled = true,
-  onPress,
-}: DeleteCustomButtonProps) => {
+const DeleteCustomButon = ({ onPress }: DeleteCustomButtonProps) => {
   return (
-    <TouchableOpacity disabled={isDisabled} onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Image
-        source={icons.deletePNG || require("../assets/icons/delete.png")}
-        className={`w-10 h-10 ${isDisabled ? "opacity-30" : ""}`}
-        tintColor={"black"}
+        source={icons.deletePNG as ImageSourcePropType}
+        className={`w-8 h-8 opacity-100 justify-center items-center`}
+        tintColor={"#e11d48"}
       />
     </TouchableOpacity>
   );

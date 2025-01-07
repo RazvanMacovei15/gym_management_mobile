@@ -22,10 +22,12 @@ const More = () => {
   };
 
   return (
-    <View className="flex flex-col h-full">
+    <View className="flex flex-col h-full bg-slate-900">
       <View className="grow items-center justify-center">
-        <Text>More content will be available here in the future.</Text>
-        <Text className="p-10 text-3xl text-green-700">
+        <Text className="text-[#831843]">
+          More content will be available here in the future.
+        </Text>
+        <Text className="p-10 text-3xl text-[#831843]">
           Stay tuned for more!
         </Text>
       </View>

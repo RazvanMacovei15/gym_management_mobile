@@ -4,5 +4,5 @@ export type Gym = {
   id: number;
   name: string;
   address: string;
-  manager: User;
+  managerId: User;
 };
