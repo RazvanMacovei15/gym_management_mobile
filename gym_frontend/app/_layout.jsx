@@ -5,10 +5,13 @@ import { ErrorBoundary, Slot, Stack } from "expo-router";
 import { AuthProvider } from "../app/context/AuthContext";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { ModalProvider } from "../app/context/ModalContext";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 const RootLayout = () => {
   return (
-    <AuthProvider>
+    <SafeAreaProvider>
+<AuthProvider>
       <ModalProvider>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -18,6 +21,9 @@ const RootLayout = () => {
       </ModalProvider>
       
     </AuthProvider>
+    </SafeAreaProvider>
+
+    
   );
 };
 
