@@ -3,7 +3,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Task } from "@/components/types/Task";
 import axios from "axios";
-import { set } from "date-fns";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const TaskDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -43,7 +43,7 @@ const TaskDetailsScreen = () => {
   }, []);
 
   return (
-    <View className="flex-1 items-center justify-start bg-slate-900 gap-1 p-4">
+    <SafeAreaView className="flex items-center justify-start bg-slate-900 gap-1 p-4 h-full">
       <Text className="text-white text-3xl font-bold w-full">
         Title: {task?.title}
       </Text>
@@ -79,18 +79,18 @@ const TaskDetailsScreen = () => {
           <Text className="text-white text-xl">{task?.deadline}</Text>
         </View>
         <Text className="text-white text-xl w-full font-bold">
-          Description:{" "}
+          Description:{"    "}
         </Text>
         <Text className="text-gray-300 w-full grow bg-slate-800 p-2 rounded-2xl h-1/2">
           {task?.description}
         </Text>
       </View>
       <View className="w-full h-px bg-gray-300 mt-2 " />
-      <View className="flex flex-row p-2 w-full items-center justify-between mt-2">
+      <View className="flex flex-row w-full py-2 items-center justify-between mt-2">
         <Button title="Mark as done" onPress={markAsDone} />
         <Button title="Back" onPress={() => router.push("/(tabs)")} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
