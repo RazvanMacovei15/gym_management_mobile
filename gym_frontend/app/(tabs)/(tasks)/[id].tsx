@@ -79,7 +79,7 @@ const TaskDetailsScreen = () => {
           <Text className="text-white text-xl">{task?.deadline}</Text>
         </View>
         <Text className="text-white text-xl w-full font-bold">
-          Description:{" "}
+          Description:{"    "}
         </Text>
         <Text className="text-gray-300 w-full grow bg-slate-800 p-2 rounded-2xl h-1/2">
           {task?.description}
