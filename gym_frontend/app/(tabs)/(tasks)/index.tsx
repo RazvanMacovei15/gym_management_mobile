@@ -8,7 +8,6 @@ import TaskCard from "@/components/task-view/task-minicard/TaskCard";
 import { Link, useRouter } from "expo-router";
 import { useAuth } from "@/app/context/AuthContext";
 import { Gym } from "@/components/types/Gym";
-import { set } from "date-fns";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
