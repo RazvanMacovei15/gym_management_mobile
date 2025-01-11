@@ -8,6 +8,7 @@ import {
   ImageSourcePropType,
 } from "react-native";
 import { icons } from "../../constants";
+import * as Font from "expo-font";
 import { useAuth } from "@/app/context/AuthContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -26,7 +27,7 @@ const TopNav = ({ onPress }: TopNavProps) => {
   const insets = useSafeAreaInsets();
 
   return (
-    <View className="flex flex-row justify-around pb-4 rounded-b-3xl items-center">
+    <View className="flex flex-row justify-around pb-4 rounded-b-3xl items-center pt-5">
       <TouchableOpacity className="justify-center items-center w-1/4">
         <Image
           resizeMode="cover"
@@ -35,10 +36,16 @@ const TopNav = ({ onPress }: TopNavProps) => {
         />
       </TouchableOpacity>
       <TouchableOpacity className="flex flex-col w-2/4 items-center justify-center">
-        <Text className="text-4xl rounded-lg p-2 font-medium text-center text-[#9d174d]">
+        <Text
+          className="text-5xl rounded-lg p-2 font-medium text-center text-[#9d174d]"
+          style={{ fontFamily: "Poppins-Bold" }}
+        >
           GYM
         </Text>
-        <Text className="text-center text-xs text-[#9d174d] w-full ">
+        <Text
+          className="text-center text-xs text-[#9d174d] w-full "
+          style={{ fontFamily: "Poppins-Bold" }}
+        >
           That which you don't track{"\n"} You can't improve
         </Text>
       </TouchableOpacity>

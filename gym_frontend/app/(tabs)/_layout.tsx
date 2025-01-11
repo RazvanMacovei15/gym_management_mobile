@@ -21,7 +21,7 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
       />
       <Text
         className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-        style={{ color: color }}
+        style={{ color: color, fontFamily: "Poppins-Light" }}
       >
         {name}
       </Text>
@@ -44,6 +44,10 @@ const TabsLayout = () => {
           borderTopEndRadius: 0,
           borderTopStartRadius: 0,
         },
+        headerTitleStyle: {
+          fontFamily: "Poppins-Bold",
+          color: "white",
+        },
       }}
     >
       <Tabs.Screen
@@ -51,6 +55,10 @@ const TabsLayout = () => {
         options={{
           title: "Dashboard",
           headerShown: false,
+          headerTitleStyle: {
+            fontFamily: "Poppins-Light",
+            color: "white",
+          },
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
               icon={icons.home_icon}
@@ -65,6 +73,7 @@ const TabsLayout = () => {
         name="(tasks)"
         options={{
           title: "Tasks",
+
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabIcon

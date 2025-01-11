@@ -23,14 +23,7 @@ const More = () => {
 
   return (
     <View className="flex flex-col h-full bg-slate-900">
-      <View className="grow items-center justify-center">
-        <Text className="text-[#831843]">
-          More content will be available here in the future.
-        </Text>
-        <Text className="p-10 text-3xl text-[#831843]">
-          Stay tuned for more!
-        </Text>
-      </View>
+      <View className="grow items-center justify-center"></View>
       <View className="p-2">
         <CustomButon handlePress={logout} title={"Log out"} />
       </View>
