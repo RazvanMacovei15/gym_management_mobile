@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Redirect, router } from "expo-router";
 import CustomButon from "@/components/CustomButton";
 import { useAuth } from "./context/AuthContext";
+import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 
 export default function App() {
@@ -31,6 +32,17 @@ export default function App() {
 
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, [authState]);
+
+  const [fontsLoaded] = Font.useFonts({
+    "Poppins-Bold": require("../../gym_frontend/assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../../gym_frontend/assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Thin": require("../../gym_frontend/assets/fonts/Poppins-Thin.ttf"),
+    "Poppins-Light": require("../../gym_frontend/assets/fonts/Poppins-Light.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   if (isLoading) {
     return (
