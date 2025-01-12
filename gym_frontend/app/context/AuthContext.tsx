@@ -83,6 +83,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           return;
         }
 
+        console.log("Token found, verifying...");
+
         // Validate token with backend
         const response = await axios.get(
           `http://maco-coding.go.ro:8010/auth/me`,
@@ -132,8 +134,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         password,
         role,
       });
-
-      console.log(result);
 
       if (result.status === 200 || result.status === 201) {
         const loginResult = await onLogin?.(email, password);
