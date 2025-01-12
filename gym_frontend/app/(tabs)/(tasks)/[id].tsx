@@ -157,10 +157,17 @@ const TaskDetailsScreen = () => {
           onPress={() => router.push("/(tabs)")}
           className="w-5/6 h-14  justify-center rounded-2xl pl-4"
         >
-          <Image
+          {/* <Image
             source={icons.leftArrow as ImageSourcePropType}
             className="h-6 w-6 px-4"
             tintColor={"white"}
+          /> */}
+          <Ionicons
+            name="arrow-back"
+            size={32}
+            color={"white"}
+
+            // style={{ transform: [{ rotate: "90deg" }] }}
           />
         </TouchableOpacity>
         <View className="items-center justify-center">
