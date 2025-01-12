@@ -204,7 +204,7 @@ const TaskDetailsScreen = () => {
           <Text
             style={{ fontFamily: "Poppins-Bold" }}
             className={`ml-2 ${
-              task?.priority === "High" ? "text-red-500" : "text-yellow-500"
+              task?.priority === "HIGH" ? "text-red-500" : "text-yellow-500"
             } text-base`}
           >
             {task?.priority}

@@ -23,7 +23,10 @@ const TaskCard = ({ task, index, onPress, onDelete }: TaskCardProps) => {
         } h-12`}
         onPress={() => setExtended(!extended)}
       >
-        <Text className="text-xl text-start text-white">
+        <Text
+          className="text-white text-base flex-shrink flex-grow flex-wrap w-3/5"
+          style={{ fontFamily: "Poppins-Light" }}
+        >
           {index + 1}. {task.title}
         </Text>
         <Text className="text-white">{task.status}</Text>
