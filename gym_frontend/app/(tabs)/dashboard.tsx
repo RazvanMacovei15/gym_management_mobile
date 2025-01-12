@@ -39,17 +39,10 @@ const Dashboard = () => {
     { name: "Backlog", value: gymData?.backlogTasks },
   ];
 
-  const colors = [
-    "#2E8B57", // Completed - Sea Green (symbolizing success/completion)
-    "#FFA500", // To Do - Orange (indicates tasks waiting to be done)
-    "#1E90FF", // In Progress - Dodger Blue (represents active progress)
-    "#FF4500", // Cancelled - Orange Red (symbolizing a stop or cancellation)
-    "#808080", // Backlog - Gray (indicating inactive or pending tasks)
-  ];
-  // Calculate total tasks
-  const totalTasks = gymData.totalTasks || 1; // Avoid division by zero
+  const colors = ["#2E8B57", "#FFA500", "#1E90FF", "#FF4500", "#808080"];
 
-  // Create series data with percentage labels
+  const totalTasks = gymData.totalTasks || 1;
+
   const series = taskData.map((task, index) => {
     const percentage = ((task.value || 0) / totalTasks) * 100;
     return {
@@ -63,7 +56,6 @@ const Dashboard = () => {
     };
   });
 
-  // Device Width and Height for PieChart
   const widthAndHeight = Dimensions.get("window").width * 0.6;
 
   const fetchGymData = async () => {
@@ -83,8 +75,6 @@ const Dashboard = () => {
       );
 
       setGymData(dataResponse.data);
-
-      console.log("Gym data:", dataResponse.data);
     } catch (err) {
       console.error("Failed to fetch gym data:", err);
     }
@@ -96,7 +86,6 @@ const Dashboard = () => {
     }
   }, [userId]);
 
-  // Render Task Card
   const renderItem = ({ item, index }: any) => (
     <View style={[styles.card, { backgroundColor: colors[index] }]}>
       <Text style={styles.taskName}>{item.name}:</Text>
@@ -104,29 +93,50 @@ const Dashboard = () => {
     </View>
   );
 
-  // Calculate total sum of series values
   const totalSeriesValue = series.reduce((sum, item) => sum + item.value, 0);
 
   return (
     <SafeAreaView className="bg-slate-900 flex-1">
       <TopNav />
-      <View className="grow items-center justify-center h-3/5">
+      <View className="grow items-center justify-center h-3/6">
         <Text
-          className="text-white text-2xl"
+          className="text-white text-2xl pb-5"
           style={{ fontFamily: "Poppins-Light" }}
           onPress={() => fetchGymData()}
         >
           Tasks Overview: {gymName?.toUpperCase()}
         </Text>
-        <Text className="text-white text-xl p-5"></Text>
+
         {totalSeriesValue > 0 ? (
-          <PieChart series={series} widthAndHeight={widthAndHeight} />
+          <View
+            style={{
+              position: "relative",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <PieChart
+              series={series}
+              widthAndHeight={widthAndHeight}
+              cover={0.6}
+            />
+            <Text
+              style={{
+                position: "absolute",
+                textAlign: "center",
+                color: "white",
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              Total tasks: {gymData.totalTasks}
+            </Text>
+          </View>
         ) : (
           <Text className="text-white text-lg mt-5">No tasks to display.</Text>
         )}
       </View>
 
-      {/* Horizontal FlatList at Bottom */}
       <FlatList
         data={taskData}
         renderItem={renderItem}
@@ -143,15 +153,14 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   listContainer: {
     paddingHorizontal: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   card: {
     backgroundColor: "#1e293b",
-    padding: 5,
-    marginHorizontal: 8,
+    marginHorizontal: 4,
     borderRadius: 20,
     borderLeftWidth: 4,
     shadowColor: "#000",
@@ -165,7 +174,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   taskName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "600",
     color: "#fff",
     fontFamily: "Poppins-Bold",

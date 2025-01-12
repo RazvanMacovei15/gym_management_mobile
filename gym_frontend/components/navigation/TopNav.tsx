@@ -36,14 +36,21 @@ const TopNav = ({ onPress }: TopNavProps) => {
         />
       </TouchableOpacity>
       <TouchableOpacity className="flex flex-col w-2/4 items-center justify-center">
-        <Text
+        {/* <Text
           className="text-5xl rounded-lg p-2 font-medium text-center text-[#9d174d]"
           style={{ fontFamily: "Poppins-Bold" }}
         >
           GYM
-        </Text>
+        </Text> */}
+        <Image
+          resizeMode="cover"
+          source={{
+            uri: "https://i.pinimg.com/736x/3f/c8/12/3fc81274aef4fce9c012ec53d8918d29.jpg",
+          }}
+          className="w-20 h-20 rounded-full"
+        />
         <Text
-          className="text-center text-xs text-[#9d174d] w-full "
+          className="text-center text-xs text-[#9d174d] w-full pt-2"
           style={{ fontFamily: "Poppins-Bold" }}
         >
           That which you don't track{"\n"} You can't improve

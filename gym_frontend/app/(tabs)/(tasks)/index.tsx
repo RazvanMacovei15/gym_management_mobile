@@ -27,7 +27,6 @@ const Tasks = () => {
 
   const userId = authState?.currentUser?.id;
 
-  // Fetch tasks from API
   const fetchTasksData = async () => {
     try {
       setLoading(true);

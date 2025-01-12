@@ -21,8 +21,10 @@ import update from "../assets/icons/update.png";
 import deletePNG from "../assets/icons/delete.png";
 import edit from "../assets/icons/edit.png";
 import arrow from "../assets/icons/arrow.png";
+import file from "../assets/icons/file.png";
 
 export default {
+  file,
   arrow,
   edit,
   deletePNG,

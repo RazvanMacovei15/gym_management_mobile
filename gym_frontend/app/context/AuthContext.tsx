@@ -9,7 +9,6 @@ import axios from "axios";
 import * as SecureStorage from "expo-secure-store";
 import { useRouter } from "expo-router";
 import { User } from "@/components/types/User";
-import { set } from "date-fns";
 
 // Constants
 const TOKEN_KEY = "my-jwt-token";
@@ -77,22 +76,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const loadToken = async () => {
       try {
         const token = await SecureStorage.getItemAsync(TOKEN_KEY);
-        const user = await SecureStorage.getItemAsync(USER_KEY);
-        const profilePhoto = await SecureStorage.getItemAsync(
-          PROFILE_PHOTO_KEY
-        );
-
-        console.log("Token loaded:", token);
-        console.log("User loaded:", user);
-        console.log("Profile photo loaded:", profilePhoto);
 
         if (!token) {
           console.log("No token found, logging out...");
           await onLogout();
           return;
         }
-
-        console.log("Token found, verifying...");
 
         // Validate token with backend
         const response = await axios.get(
