@@ -75,6 +75,7 @@ const Tasks = () => {
                   key={index}
                   task={task}
                   index={index}
+                  updateList={fetchTasksData}
                   onDelete={deleteTask}
                   onPress={() => router.push(`/(tabs)/(tasks)/${task.taskId}`)}
                 />
