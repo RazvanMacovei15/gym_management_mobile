@@ -17,7 +17,13 @@ type TaskCardProps = {
   updateList?: () => void;
 };
 
-const TaskCard = ({ task, index, onPress, onDelete, updateList }: TaskCardProps) => {
+const TaskCard = ({
+  task,
+  index,
+  onPress,
+  onDelete,
+  updateList,
+}: TaskCardProps) => {
   const [extended, setExtended] = useState<boolean>(false);
   const isDone = task.status === "DONE";
 
@@ -70,33 +76,34 @@ const TaskCard = ({ task, index, onPress, onDelete, updateList }: TaskCardProps)
         } py-1`}
         onPress={() => setExtended(!extended)}
       >
-        <View className="flex flex col">
+        <View className="flex flex-col gap-2">
           <View className="flex flex-row items-center justify-center">
             <View className=" w-[30] mr-2">
               <BouncyCheckbox
-                    size={30}
-                    disableText={true}
-                    onPress={() => {
-                      if (!isDone) {
-                        markAsDone();
-                        
-                      }
-                    }}
-                    iconStyle={{ shadowColor: "black" }}
-                    innerIconStyle={{ borderColor: "black", borderWidth: 1.5 }}
-                    useBuiltInState={false}
-                    isChecked={isDone}
-                    fillColor="green"
-                    unFillColor="transparent"
-                  />
-            </View>    
+                size={30}
+                disableText={true}
+                onPress={() => {
+                  if (!isDone) {
+                    markAsDone();
+                  }
+                }}
+                iconStyle={{ shadowColor: "black" }}
+                innerIconStyle={{ borderColor: "black", borderWidth: 1.5 }}
+                useBuiltInState={false}
+                isChecked={isDone}
+                fillColor="green"
+                unFillColor="transparent"
+              />
+            </View>
             <Text
               className="text-white text-base flex-shrink flex-wrap w-3/6 px-1"
               style={{ fontFamily: "Poppins-Light" }}
             >
               {task.title}
             </Text>
-            <View className={`h-2/4 w-px bg-gray-300 my-2 mr-2 items-center justify-center`} />
+            <View
+              className={`h-2/4 w-px bg-gray-300 my-2 mr-2 items-center justify-center`}
+            />
 
             <Text
               className={`rounded-xl pl-1 text-white w-2/6 text-center ${
@@ -117,17 +124,20 @@ const TaskCard = ({ task, index, onPress, onDelete, updateList }: TaskCardProps)
             </Text>
           </View>
           <View className="w-full felx flex-row items-center justify-start gap-2">
-          {files.length > 0 && files.map((file, index) => (
-              <View key={index} className="flex flex-row items-center justify-start py-2 pl-1">
+            {files.length > 0 &&
+              files.map((file, index) => (
+                <View
+                  key={index}
+                  className="flex flex-row items-center justify-start py-2 pl-1"
+                >
                   <Image
                     source={icons.file as ImageSourcePropType}
                     className="h-6 w-6"
                     tintColor={"white"}
                   />
-              </View>
-            ))}
+                </View>
+              ))}
           </View>
-            
         </View>
       </TouchableOpacity>
       {extended && (
