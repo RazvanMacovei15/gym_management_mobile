@@ -62,7 +62,6 @@ const TaskDetailsScreen = () => {
           params: { taskId: taskId },
         }
       );
-      console.log("Files:", response.data);
       setFiles(response.data);
     } catch (error) {
       console.error("Error fetching files:", error);
@@ -79,29 +78,8 @@ const TaskDetailsScreen = () => {
     setTask(response.data);
   };
 
-  // const downloadFile = async (file: string) => {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://maco-coding.go.ro:8010/tasks/getFile",
-  //       {
-  //         params: { taskId: task?.taskId, fileName: file },
-  //       }
-  //     );
-  //     console.log("File:", response.data);
-  //     const url = response.data;
-  //     const destination = new Directory(Paths.cache, "pdfs");
-
-  //     destination.create();
-  //     const output = await File.downloadFileAsync(url, destination);
-  //     console.log(output.exists);
-  //   } catch (err) {
-  //     console.error("Failed to download file:", err);
-  //   }
-  // };
-
   const downloadFile = async (file: string) => {
     try {
-      // Step 1: Get the file URL from your backend
       const response = await axios.get(
         "http://maco-coding.go.ro:8010/tasks/getFile",
         {
@@ -109,21 +87,16 @@ const TaskDetailsScreen = () => {
         }
       );
 
-      // Step 2: Define the local path where the file will be saved
       const fileUri = `${FileSystem.documentDirectory}${file}`;
 
-      // Step 3: Download the file from the provided URL and save it locally
       const downloadResult = await FileSystem.downloadAsync(
         response.data,
         fileUri
       );
 
-      console.log("File downloaded to:", downloadResult.uri);
-
-      // Step 4: Request permission to save the file in the media library
       const { status } = await MediaLibrary.requestPermissionsAsync();
+
       if (status === "granted") {
-        // Step 5: Save the file to the media library
         const asset = await MediaLibrary.createAssetAsync(downloadResult.uri);
         await MediaLibrary.createAlbumAsync("Download", asset, false);
         alert("File downloaded successfully!");
@@ -140,8 +113,8 @@ const TaskDetailsScreen = () => {
     fetchTaskData();
     getFiles();
   }, []);
+
   useEffect(() => {
-    // Fetch files only after task data is loaded
     if (task) {
       getFiles();
     }
@@ -157,18 +130,7 @@ const TaskDetailsScreen = () => {
           onPress={() => router.push("/(tabs)")}
           className="w-5/6 h-14  justify-center rounded-2xl pl-4"
         >
-          {/* <Image
-            source={icons.leftArrow as ImageSourcePropType}
-            className="h-6 w-6 px-4"
-            tintColor={"white"}
-          /> */}
-          <Ionicons
-            name="arrow-back"
-            size={32}
-            color={"white"}
-
-            // style={{ transform: [{ rotate: "90deg" }] }}
-          />
+          <Ionicons name="arrow-back" size={32} color={"white"} />
         </TouchableOpacity>
         <View className="items-center justify-center">
           <BouncyCheckbox

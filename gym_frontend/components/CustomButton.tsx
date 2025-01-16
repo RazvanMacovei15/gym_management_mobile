@@ -22,7 +22,7 @@ const CustomButon = ({ handlePress, title, isLoading }: SigninButtonProps) => {
     >
       <Text
         className={
-          "bg-yellow-400 text-black p-5 w-full text-center rounded-xl text-2xl"
+          "bg-pink-900 text-white p-5 w-full text-center rounded-xl text-2xl"
         }
       >
         {title}

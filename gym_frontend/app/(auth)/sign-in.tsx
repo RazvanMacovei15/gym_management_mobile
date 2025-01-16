@@ -44,7 +44,7 @@ const SignIn = () => {
     <SafeAreaView className="bg-gray-800 h-full p-5">
       <ScrollView>
         <View className="w-full min-h-[85vh] flex flex-col">
-          <Text className="text-yellow-400 text-4xl text-center w-full mt-10 pb-20">
+          <Text className="text-pink-900 text-4xl text-center w-full mt-10 pb-20">
             SIGN IN PAGE
           </Text>
           <View className="mb-20">
@@ -82,7 +82,7 @@ const SignIn = () => {
             isLoading={isSubmitting}
           />
           <View className="w-full flex flex-row justify-center items-center mt-5">
-            <Text className="text-yellow-400 text-xl flex flex-row pr-5">
+            <Text className="text-pink-900 text-xl flex flex-row pr-5">
               Don't have an account?
             </Text>
             <Link href="/sign-up" className="text-gray-200 text-xl">
