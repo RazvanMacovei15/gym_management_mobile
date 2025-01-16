@@ -78,12 +78,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         const token = await SecureStorage.getItemAsync(TOKEN_KEY);
 
         if (!token) {
-          console.log("No token found, logging out...");
           await onLogout();
           return;
         }
-
-        console.log("Token found, verifying...");
 
         // Validate token with backend
         const response = await axios.get(
@@ -125,9 +122,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     role: string
   ) => {
     try {
-      console.log(name);
-      console.log(email);
-
       const result = await axios.post(`${API_URL}auth/signup`, {
         name,
         email,

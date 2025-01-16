@@ -11,7 +11,6 @@ const More = () => {
     if (onLogout) {
       try {
         await onLogout(); // Await logout to complete
-        console.log("User successfully logged out");
 
         // Navigate to Sign-In screen after logout
         router.push("/sign-in");

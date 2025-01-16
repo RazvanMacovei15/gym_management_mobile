@@ -57,7 +57,6 @@ const TaskCard = ({
           params: { taskId: taskId },
         }
       );
-      console.log("Files:", response.data);
       setFiles(response.data);
     } catch (error) {
       console.error("Error fetching files:", error);
